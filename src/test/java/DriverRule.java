@@ -1,32 +1,26 @@
 import org.junit.After;
 import org.junit.Before;
+import org.junit.rules.ExternalResource;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
+import java.io.File;
 import java.time.Duration;
 
-public class DriverRule {
+public class DriverRule extends ExternalResource {
 
     protected WebDriver driver;
 
-    @Before
-    public void setUp() {
-        //Yandex browser:
+    public String DRIVER_PATH = new File("driver/yandexdriver.exe").getAbsolutePath();
 
-        System.setProperty("webdriver.chrome.driver", "C:\\WebDriver\\bin\\yandexdriver.exe");
+    @Before
+    public void setUp() throws Throwable {
+        System.setProperty("webdriver.chrome.driver", DRIVER_PATH);
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--start-maximized");
-        chromeOptions.setBinary("C:\\Users\\meshe\\AppData\\Local\\Yandex\\YandexBrowser\\Application\\browser.exe");
         driver = new ChromeDriver(chromeOptions);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-
-
-        //Chrome browser:
-//        ChromeOptions chromeOptions = new ChromeOptions();
-//        chromeOptions.addArguments("--start-maximized");
-//        driver = new ChromeDriver(chromeOptions);
-//        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
     }
 
     @After

@@ -30,34 +30,41 @@ public class LoginPage {
     public LoginPage(WebDriver driver){
         this.driver = driver;
     }
+
+    @Step
     public void open() {
         driver.get(PageForTest.LOGIN_PAGE_URL);
     }
-
+    @Step
     public void inputEmail(String text){
         driver.findElement(emailField).sendKeys(text);
     }
+    @Step
     public void inputPassword(String text) {
         driver.findElement(passwordField).sendKeys(text);
     }
+    @Step
     public void clickRegisterButton() {
         driver.findElement(registerButton).click();
     }
+    @Step
     public void checkTextOnLoginPage() {
         String text = driver.findElement(textOnLoginPage).getText();
         MatcherAssert.assertThat(text, StringStartsWith.startsWith("Вход"));
     }
+    @Step
     public void checkRegistrationIsSuccessfully(){
         String textOfRestorePasswordButton = driver.findElement(restorePasswordButton).getText();
         MatcherAssert.assertThat(textOfRestorePasswordButton, startsWith("Восстановить пароль"));
     }
+    @Step
     public void clickSignInButton(){
         driver.findElement(signInButton).click();
     }
+    @Step
     public void clickRestorePasswordButton(){
         driver.findElement(restorePasswordButton).click();
     }
-
     @Step
     public void login( String email, String password) {
         inputEmail(email);

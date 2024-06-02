@@ -27,27 +27,32 @@ public class RegisterPage {
     public RegisterPage(WebDriver driver){
         this.driver = driver;
     }
-
+    @Step
     public void open() {
         driver.get(PageForTest.REGISTER_PAGE_URL);
     }
-
+    @Step
     public void inputName(String text){
         driver.findElement(nameField).sendKeys(text);
     }
+    @Step
     public void inputEmail(String text){
         driver.findElement(emailField).sendKeys(text);
     }
+    @Step
     public void inputPassword(String text){
         driver.findElement(passwordField).sendKeys(text);
     }
+    @Step
     public void clickFinallyRegisterButton(){
         driver.findElement(registerButton).click();
     }
+    @Step
     public void checkShortPasswordError(){
         String textOfError = driver.findElement(shortPasswordError).getText();
         MatcherAssert.assertThat("Вход", textOfError, startsWith("Некорректный пароль"));
     }
+    @Step
     public void clickSignInButton(){
         driver.findElement(signInButton).click();
     }
